@@ -436,11 +436,10 @@ export default function App() {
               href="https://github.com/darkqiank/5layerpanels"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-3 py-1.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-600 font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 mr-1"
+              className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-500 shadow-sm transition-all flex items-center mr-1"
               title={lang === 'zh' ? '访问 GitHub 仓库' : 'Visit GitHub Repository'}
             >
-              <Github size={14} className="text-slate-500 hover:text-indigo-500 transition-colors" />
-              <span className="hidden sm:inline">GitHub</span>
+              <Github size={14} />
             </a>
 
             {activeTab === 'app' ? (
