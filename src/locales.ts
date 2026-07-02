@@ -18,7 +18,7 @@ export const LOCALES = {
     importSuccess: '导入成功',
     resetToDemo: '重置数据',
     addNewSub: '新添订阅',
-    enterConsole: '进入管理控制台',
+    enterConsole: '进入演示控制台',
     exitConsole: '退出控制台',
     viewPricing: '查看版本定价',
     gridMode: '卡片',
@@ -67,7 +67,7 @@ export const LOCALES = {
 
     // Pricing
     pricingTitle: '订阅计划与版本对比',
-    pricingDesc: '选择符合您当前订阅规模的方案（专业版仅需 $50/月）',
+    pricingDesc: '选择符合您当前订阅规模的方案（专业版仅需 $10/月）',
     pricingNote: '标准版和专业版现在皆支持无限量订阅服务追踪！',
     
     standardName: '标准版',
@@ -75,7 +75,7 @@ export const LOCALES = {
     standardCta: '免费启用标准版',
     
     premiumName: '专业版',
-    premiumPrice: '¥50 / 月',
+    premiumPrice: '$10 / 月',
     premiumCta: '立即升级专业版',
     premiumAlert: '感谢您对专业版的支持！该功能正在灰度发布中。您可以先在顶栏点击进入 [控制台] 体验完整的面板功能！',
 
@@ -129,7 +129,7 @@ export const LOCALES = {
     importSuccess: 'Import Successful',
     resetToDemo: 'Reset Data',
     addNewSub: 'Add Subscription',
-    enterConsole: 'Enter Dashboard Console',
+    enterConsole: 'Enter Demo Console',
     exitConsole: 'Exit Console',
     viewPricing: 'View Pricing & Plans',
     gridMode: 'Grid View',
@@ -178,7 +178,7 @@ export const LOCALES = {
 
     // Pricing
     pricingTitle: 'Plans & Pricing',
-    pricingDesc: 'Choose a plan that fits your subscription volume (Premium plan is just $50/month)',
+    pricingDesc: 'Choose a plan that fits your subscription volume (Premium plan is just $10/month)',
     pricingNote: 'Both Standard and Premium plans now support UNLIMITED subscription tracking!',
     
     standardName: 'Standard',
@@ -186,7 +186,7 @@ export const LOCALES = {
     standardCta: 'Get Started Free',
     
     premiumName: 'Premium',
-    premiumPrice: '¥50 / Mo',
+    premiumPrice: '$10 / Mo',
     premiumCta: 'Upgrade to Premium',
     premiumAlert: 'Thank you for your support! This feature is being rolled out. In the meantime, click [Enter Console] in the top navigation bar to try all professional billing features!',
 

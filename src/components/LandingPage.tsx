@@ -22,16 +22,20 @@ import {
   BrainCircuit,
   Terminal,
   Layers3,
-  Tv
+  Tv,
+  Languages,
+  Github
 } from 'lucide-react';
 import { LOCALES, Language } from '../locales';
+import { FiveLayersLogo } from './FiveLayersLogo';
 
 interface LandingPageProps {
   onEnterApp: () => void;
   lang: Language;
+  onToggleLanguage: () => void;
 }
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang, onToggleLanguage }) => {
   const t = LOCALES[lang];
 
   // 5 Layers Concept Showcase
@@ -136,7 +140,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) =>
     },
     {
       name: t.premiumName,
-      price: lang === 'zh' ? '¥50' : '$7',
+      price: '$10',
       period: lang === 'zh' ? '月' : 'Mo',
       description: lang === 'zh' ? '专为数字游民、极客、家庭组及初创企业打造的终极管理面板' : 'The ultimate panel for digital nomads, tech geeks, power users, and family groups.',
       features: [
@@ -158,8 +162,80 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) =>
 
   return (
     <div className="bg-gradient-to-b from-slate-50 to-white min-h-screen">
+      {/* Brand Header with Quick Navigation */}
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100/60 px-4 py-3 md:px-8 shadow-sm">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-2.5 select-none">
+            <FiveLayersLogo size={32} />
+            <div>
+              <h1 className="text-sm font-black text-slate-800 tracking-tight leading-tight">5 Layers Panel</h1>
+              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">@5layers.ai</p>
+            </div>
+          </div>
+
+          {/* Quick Navigation Links */}
+          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-500">
+            <a href="#cake-concept" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
+              {lang === 'zh' ? '🍰 五层蛋糕架构' : '🍰 AI Cake'}
+            </a>
+            <a href="#features" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
+              {lang === 'zh' ? '✨ 核心特色' : '✨ Features'}
+            </a>
+            <a href="#pricing" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
+              {lang === 'zh' ? '💰 版本定价' : '💰 Pricing'}
+            </a>
+            <a href="#privacy" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
+              {lang === 'zh' ? '🔒 本地隐私' : '🔒 Privacy'}
+            </a>
+          </nav>
+
+          <div className="flex items-center gap-2">
+            {/* Language Selector */}
+            <button
+              onClick={onToggleLanguage}
+              className="px-3 py-1.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-600 font-bold text-xs shadow-sm transition-all cursor-pointer flex items-center gap-1.5 mr-1"
+              title={lang === 'zh' ? 'Switch to English' : '切换为中文'}
+            >
+              <Languages size={14} className="text-slate-500 hover:text-indigo-500 transition-colors" />
+              <span>{lang === 'zh' ? 'EN' : '中'}</span>
+            </button>
+
+            {/* GitHub Link */}
+            <a
+              href="https://github.com/darkqiank/5layerpanels"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-500 shadow-sm transition-all flex items-center mr-1"
+              title={lang === 'zh' ? '访问 GitHub 仓库' : 'Visit GitHub Repository'}
+            >
+              <Github size={14} />
+            </a>
+
+            <button
+              onClick={onEnterApp}
+              className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-sm transition-all cursor-pointer flex items-center gap-1.5"
+            >
+              <span>{t.enterConsole}</span>
+              <ArrowRight size={12} />
+            </button>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 px-4 md:px-8 text-center max-w-5xl mx-auto space-y-6">
+      <section className="relative overflow-hidden pt-12 pb-16 md:pt-16 md:pb-20 px-4 md:px-8 text-center max-w-5xl mx-auto space-y-6">
+        {/* Brand Logo Showcase */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="flex justify-center mb-2"
+        >
+          <div className="p-4 bg-white rounded-3xl border border-slate-100 shadow-md flex items-center justify-center">
+            <FiveLayersLogo size={72} />
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -219,10 +295,51 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) =>
             {t.viewPricing}
           </a>
         </motion.div>
+
+        {/* Quick Navigation Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.25 }}
+          className="pt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto"
+        >
+          <a
+            href="#cake-concept"
+            className="p-3.5 rounded-2xl bg-white border border-slate-100 hover:border-indigo-100/80 hover:bg-indigo-50/10 shadow-sm hover:shadow-md transition-all group flex flex-col items-center justify-center text-center gap-1.5 cursor-pointer"
+          >
+            <span className="text-2xl group-hover:scale-110 transition-transform">🍰</span>
+            <span className="text-xs font-bold text-slate-700">{lang === 'zh' ? '五层蛋糕理论' : 'Cake Architecture'}</span>
+            <span className="text-[10px] text-slate-400 font-medium">{lang === 'zh' ? 'L1 ~ L5 费用架构' : 'L1-L5 cost split'}</span>
+          </a>
+          <a
+            href="#features"
+            className="p-3.5 rounded-2xl bg-white border border-slate-100 hover:border-indigo-100/80 hover:bg-indigo-50/10 shadow-sm hover:shadow-md transition-all group flex flex-col items-center justify-center text-center gap-1.5 cursor-pointer"
+          >
+            <span className="text-2xl group-hover:scale-110 transition-transform">✨</span>
+            <span className="text-xs font-bold text-slate-700">{lang === 'zh' ? '六大核心功能' : 'Core Features'}</span>
+            <span className="text-[10px] text-slate-400 font-medium">{lang === 'zh' ? '高精度倒数与日历' : 'Countdowns & calendar'}</span>
+          </a>
+          <a
+            href="#pricing"
+            className="p-3.5 rounded-2xl bg-white border border-slate-100 hover:border-indigo-100/80 hover:bg-indigo-50/10 shadow-sm hover:shadow-md transition-all group flex flex-col items-center justify-center text-center gap-1.5 cursor-pointer"
+          >
+            <span className="text-2xl group-hover:scale-110 transition-transform">💰</span>
+            <span className="text-xs font-bold text-slate-700">{lang === 'zh' ? '版本定价比较' : 'Pricing Plans'}</span>
+            <span className="text-[10px] text-slate-400 font-medium">{lang === 'zh' ? '终身免费与极客版' : 'Lifetime vs Premium'}</span>
+          </a>
+          <a
+            href="#privacy"
+            className="p-3.5 rounded-2xl bg-white border border-slate-100 hover:border-indigo-100/80 hover:bg-indigo-50/10 shadow-sm hover:shadow-md transition-all group flex flex-col items-center justify-center text-center gap-1.5 cursor-pointer"
+          >
+            <span className="text-2xl group-hover:scale-110 transition-transform">🔒</span>
+            <span className="text-xs font-bold text-slate-700">{lang === 'zh' ? '本地隐私沙箱' : 'Local Sandbox'}</span>
+            <span className="text-[10px] text-slate-400 font-medium">{lang === 'zh' ? '零上云100%安全' : '100% Client security'}</span>
+          </a>
+        </motion.div>
       </section>
 
       {/* The 5 Layers Cake Concept Explain */}
-      <section className="py-12 px-4 md:px-8 max-w-4xl mx-auto bg-slate-50/50 rounded-3xl border border-slate-100/80 mb-16">
+      <section id="cake-concept" className="py-12 px-4 md:px-8 max-w-4xl mx-auto bg-slate-50/50 rounded-3xl border border-slate-100/80 mb-16 scroll-mt-20">
         <div className="text-center space-y-2 mb-10">
           <h3 className="text-xl font-bold text-slate-800 tracking-tight flex items-center justify-center gap-2">
             <span>🎂</span> {t.cakeSectionTitle}
@@ -268,7 +385,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) =>
       </section>
 
       {/* Feature Bento Grid */}
-      <section className="py-12 px-4 md:px-8 max-w-7xl mx-auto">
+      <section id="features" className="py-12 px-4 md:px-8 max-w-7xl mx-auto scroll-mt-20">
         <div className="text-center space-y-2 mb-12">
           <h3 className="text-2xl font-bold text-slate-800 tracking-tight">
             {lang === 'zh' ? '为什么选择 5 layers 订阅看板？' : 'Why Choose 5 layers?'}
@@ -376,7 +493,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang }) =>
       </section>
 
       {/* Trust & Local sandbox assurance */}
-      <section className="py-12 px-4 text-center max-w-3xl mx-auto space-y-6">
+      <section id="privacy" className="py-12 px-4 text-center max-w-3xl mx-auto space-y-6 scroll-mt-20">
         <div className="p-6 bg-slate-50/50 rounded-2xl border border-slate-100 flex flex-col sm:flex-row items-center gap-4 text-left">
           <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl flex-shrink-0">
             <Users size={24} />

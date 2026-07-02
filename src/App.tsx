@@ -33,6 +33,7 @@ import { NotificationCenter } from './components/NotificationCenter';
 import { getNextBillingDate } from './utils';
 import { LandingPage } from './components/LandingPage';
 import { Language, LOCALES } from './locales';
+import { FiveLayersLogo } from './components/FiveLayersLogo';
 
 // Programmatically generate initial dates relative to July 1, 2026 for demonstration
 const SAMPLE_SUBSCRIPTIONS: Subscription[] = [
@@ -396,145 +397,136 @@ export default function App() {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
 
       {/* Primary Top Bar */}
-      <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-100/80 px-4 py-3 md:px-8 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-          {/* Logo Branding */}
-          <div 
-            className="flex items-center gap-3 select-none group" 
-            title={t.appName}
-          >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-100 group-hover:scale-105 transition-transform">
-              <span className="text-xl">💳</span>
-            </div>
-            <div>
-              <h1 className="text-base font-black text-slate-800 tracking-tight flex items-center gap-1.5">
-                {t.appName}
-                <span className="text-[10px] bg-indigo-50 text-indigo-600 font-extrabold px-2 py-0.5 rounded-full border border-indigo-100/60">
-                  {t.badge}
-                </span>
-              </h1>
-              <p className="text-[10px] text-slate-400 font-medium">
-                {t.desc}
-              </p>
-            </div>
-          </div>
-
-          {/* Adaptive Actions Area */}
-          <div className="flex items-center flex-wrap gap-2">
-            {/* Language Selector */}
-            <button
-              onClick={toggleLanguage}
-              className="px-3 py-1.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-600 font-bold text-xs shadow-sm transition-all cursor-pointer flex items-center gap-1.5 mr-1"
-              title={lang === 'zh' ? 'Switch to English' : '切换为中文'}
+      {activeTab === 'app' && (
+        <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-100/80 px-4 py-3 md:px-8 shadow-[0_1px_2px_rgba(0,0,0,0.01)]">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* Logo Branding */}
+            <div 
+              className="flex items-center gap-3 select-none group cursor-pointer" 
+              title={t.appName}
+              onClick={() => setActiveTab('landing')}
             >
-              <Languages size={14} className="text-slate-500 group-hover:text-indigo-500 transition-colors" />
-              <span>{lang === 'zh' ? 'EN' : '中'}</span>
-            </button>
-
-            {/* GitHub Link */}
-            <a
-              href="https://github.com/darkqiank/5layerpanels"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-500 shadow-sm transition-all flex items-center mr-1"
-              title={lang === 'zh' ? '访问 GitHub 仓库' : 'Visit GitHub Repository'}
-            >
-              <Github size={14} />
-            </a>
-
-            {activeTab === 'app' ? (
-              <>
-                {/* Export */}
-                <button
-                  onClick={handleExportData}
-                  className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-700 flex items-center gap-1.5 text-xs font-semibold shadow-sm transition-all cursor-pointer"
-                  title={lang === 'zh' ? '导出备份 JSON' : 'Export JSON Backup'}
-                >
-                  <Download size={14} />
-                  <span className="hidden md:inline">{t.exportBackup}</span>
-                </button>
-
-                {/* Import Hidden Trigger */}
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  onChange={handleImportFile}
-                  accept=".json"
-                  className="hidden"
-                />
-                <button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-700 flex items-center gap-1.5 text-xs font-semibold shadow-sm transition-all cursor-pointer"
-                  title={lang === 'zh' ? '导入备份 JSON' : 'Import JSON Backup'}
-                >
-                  {importStatus === 'success' ? (
-                    <FileCheck size={14} className="text-emerald-500" />
-                  ) : (
-                    <Upload size={14} />
-                  )}
-                  <span className="hidden md:inline">
-                    {importStatus === 'success' ? t.importSuccess : t.importBackup}
+              <div className="w-10 h-10 rounded-xl bg-white border border-slate-100 flex items-center justify-center shadow-sm group-hover:scale-105 group-hover:border-indigo-100/80 transition-all">
+                <FiveLayersLogo size={32} />
+              </div>
+              <div>
+                <h1 className="text-base font-black text-slate-800 tracking-tight flex items-center gap-1.5">
+                  {t.appName}
+                  <span className="text-[10px] bg-indigo-50 text-indigo-600 font-extrabold px-2 py-0.5 rounded-full border border-indigo-100/60">
+                    {t.badge}
                   </span>
-                </button>
+                </h1>
+                <p className="text-[10px] text-slate-400 font-medium">
+                  {t.desc}
+                </p>
+              </div>
+            </div>
 
-                {/* Reset */}
-                <button
-                  onClick={handleResetData}
-                  className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-600 shadow-sm transition-all cursor-pointer"
-                  title={lang === 'zh' ? '重置到默认演示数据' : 'Reset to Defaults'}
-                >
-                  <RotateCcw size={14} />
-                </button>
-
-                <div className="w-[1px] h-6 bg-slate-200 mx-1" />
-
-                {/* Alert bell icon with counter badge */}
-                <button
-                  onClick={() => setIsNotificationsOpen(true)}
-                  className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-600 relative shadow-sm transition-all cursor-pointer"
-                  title={lang === 'zh' ? '查看临近到期提醒' : 'View Expiry Alerts'}
-                >
-                  <Bell size={15} />
-                  {alertCount > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center animate-pulse border-2 border-white">
-                      {alertCount}
-                    </span>
-                  )}
-                </button>
-
-                {/* Add New Button */}
-                <button
-                  onClick={() => {
-                    setEditingSubscription(null);
-                    setIsModalOpen(true);
-                  }}
-                  className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-100 hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
-                >
-                  <Plus size={15} />
-                  <span>{t.addNewSub}</span>
-                </button>
-
-                {/* Exit Button - Minimalist, Icon only, extreme right */}
-                <button
-                  onClick={() => setActiveTab('landing')}
-                  className="p-2.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 hover:text-rose-600 hover:border-rose-200 text-slate-500 shadow-sm transition-all cursor-pointer"
-                  title={t.exitConsole}
-                >
-                  <LogOut size={15} />
-                </button>
-              </>
-            ) : (
+            {/* Adaptive Actions Area */}
+            <div className="flex items-center flex-wrap gap-2">
+              {/* Language Selector */}
               <button
-                onClick={() => setActiveTab('app')}
-                className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-100 hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
+                onClick={toggleLanguage}
+                className="px-3 py-1.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-600 font-bold text-xs shadow-sm transition-all cursor-pointer flex items-center gap-1.5 mr-1"
+                title={lang === 'zh' ? 'Switch to English' : '切换为中文'}
               >
-                <span>{t.enterConsole}</span>
-                <ArrowRight size={14} />
+                <Languages size={14} className="text-slate-500 group-hover:text-indigo-500 transition-colors" />
+                <span>{lang === 'zh' ? 'EN' : '中'}</span>
               </button>
-            )}
+
+              {/* GitHub Link */}
+              <a
+                href="https://github.com/darkqiank/5layerpanels"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-500 shadow-sm transition-all flex items-center mr-1"
+                title={lang === 'zh' ? '访问 GitHub 仓库' : 'Visit GitHub Repository'}
+              >
+                <Github size={14} />
+              </a>
+
+              {/* Export */}
+              <button
+                onClick={handleExportData}
+                className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-700 flex items-center gap-1.5 text-xs font-semibold shadow-sm transition-all cursor-pointer"
+                title={lang === 'zh' ? '导出备份 JSON' : 'Export JSON Backup'}
+              >
+                <Download size={14} />
+                <span className="hidden md:inline">{t.exportBackup}</span>
+              </button>
+
+              {/* Import Hidden Trigger */}
+              <input
+                type="file"
+                ref={fileInputRef}
+                onChange={handleImportFile}
+                accept=".json"
+                className="hidden"
+              />
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-700 flex items-center gap-1.5 text-xs font-semibold shadow-sm transition-all cursor-pointer"
+                title={lang === 'zh' ? '导入备份 JSON' : 'Import JSON Backup'}
+              >
+                {importStatus === 'success' ? (
+                  <FileCheck size={14} className="text-emerald-500" />
+                ) : (
+                  <Upload size={14} />
+                )}
+                <span className="hidden md:inline">
+                  {importStatus === 'success' ? t.importSuccess : t.importBackup}
+                </span>
+              </button>
+
+              {/* Reset */}
+              <button
+                onClick={handleResetData}
+                className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-600 shadow-sm transition-all cursor-pointer"
+                title={lang === 'zh' ? '重置到默认演示数据' : 'Reset to Defaults'}
+              >
+                <RotateCcw size={14} />
+              </button>
+
+              <div className="w-[1px] h-6 bg-slate-200 mx-1" />
+
+              {/* Alert bell icon with counter badge */}
+              <button
+                onClick={() => setIsNotificationsOpen(true)}
+                className="p-2.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-600 relative shadow-sm transition-all cursor-pointer"
+                title={lang === 'zh' ? '查看临近到期提醒' : 'View Expiry Alerts'}
+              >
+                <Bell size={15} />
+                {alertCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center animate-pulse border-2 border-white">
+                    {alertCount}
+                  </span>
+                )}
+              </button>
+
+              {/* Add New Button */}
+              <button
+                onClick={() => {
+                  setEditingSubscription(null);
+                  setIsModalOpen(true);
+                }}
+                className="px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-indigo-100 hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <Plus size={15} />
+                <span>{t.addNewSub}</span>
+              </button>
+
+              {/* Exit Button - Minimalist, Icon only, extreme right */}
+              <button
+                onClick={() => setActiveTab('landing')}
+                className="p-2.5 rounded-xl border border-slate-200/80 bg-white hover:bg-slate-50 hover:text-rose-600 hover:border-rose-200 text-slate-500 shadow-sm transition-all cursor-pointer"
+                title={t.exitConsole}
+              >
+                <LogOut size={15} />
+              </button>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       {/* Main Container Stage */}
       <AnimatePresence mode="wait">
@@ -547,7 +539,11 @@ export default function App() {
             transition={{ duration: 0.2 }}
             className="flex-grow"
           >
-            <LandingPage onEnterApp={() => setActiveTab('app')} lang={lang} />
+            <LandingPage 
+              onEnterApp={() => setActiveTab('app')} 
+              lang={lang} 
+              onToggleLanguage={toggleLanguage} 
+            />
           </motion.div>
         ) : (
           <motion.main
