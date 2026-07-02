@@ -1,0 +1,8 @@
+{
+  "name": "5 layers",
+  "description": "基于黄仁勋五层 AI 蛋糕理论设计的订阅追踪与成本控制面板，从算力基建到数字娱乐，分层解析您的数字资产流向与续费提醒。",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
