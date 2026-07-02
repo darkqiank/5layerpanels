@@ -21,7 +21,8 @@ import {
   FileCheck,
   ArrowRight,
   Languages,
-  LogOut
+  LogOut,
+  Github
 } from 'lucide-react';
 import { Subscription, Category, PaymentMethod } from './types';
 import { StatsOverview } from './components/StatsOverview';
@@ -430,6 +431,18 @@ export default function App() {
               <span>{lang === 'zh' ? 'EN' : '中'}</span>
             </button>
 
+            {/* GitHub Link */}
+            <a
+              href="https://github.com/darkqiank/5layerpanels"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-3 py-1.5 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-600 font-bold text-xs shadow-sm transition-all flex items-center gap-1.5 mr-1"
+              title={lang === 'zh' ? '访问 GitHub 仓库' : 'Visit GitHub Repository'}
+            >
+              <Github size={14} className="text-slate-500 hover:text-indigo-500 transition-colors" />
+              <span className="hidden sm:inline">GitHub</span>
+            </a>
+
             {activeTab === 'app' ? (
               <>
                 {/* Export */}
@@ -796,8 +809,18 @@ export default function App() {
             </span>
             <span>{t.sandboxActive}</span>
           </div>
-          <div className="text-slate-400/80 flex items-center gap-2">
+          <div className="text-slate-400/80 flex items-center gap-2 flex-wrap justify-center">
             <span>{t.versionInfo}</span>
+            <span>•</span>
+            <a 
+              href="https://github.com/darkqiank/5layerpanels" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="hover:text-indigo-500 text-slate-500 font-semibold inline-flex items-center gap-1 transition-colors"
+            >
+              <Github size={11} />
+              <span>darkqiank/5layerpanels</span>
+            </a>
             <span>•</span>
             <span className="font-semibold text-slate-500">@5layers.ai</span>
           </div>
