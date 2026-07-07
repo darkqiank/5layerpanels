@@ -184,8 +184,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang, onTo
             <a href="#pricing" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
               {lang === 'zh' ? '💰 版本定价' : '💰 Pricing'}
             </a>
-            <a href="#privacy" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
-              {lang === 'zh' ? '🔒 本地隐私' : '🔒 Privacy'}
+            <a href="/privacy-policy/index.html" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
+              {lang === 'zh' ? '隐私政策' : 'Privacy Policy'}
+            </a>
+            <a href="/terms-of-service/index.html" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
+              {lang === 'zh' ? '服务条款' : 'Terms'}
             </a>
           </nav>
 
@@ -504,6 +507,17 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang, onTo
               {t.aboutDemoDesc}
             </p>
           </div>
+        </div>
+        <div className="flex flex-wrap justify-center gap-3 text-[11px] font-bold text-slate-500">
+          <a href="/privacy-policy/index.html" className="px-3 py-2 rounded-xl bg-white border border-slate-100 hover:border-indigo-100 hover:text-indigo-600 shadow-sm transition-all">
+            {lang === 'zh' ? '查看完整隐私政策' : 'View Privacy Policy'}
+          </a>
+          <a href="/terms-of-service/index.html" className="px-3 py-2 rounded-xl bg-white border border-slate-100 hover:border-indigo-100 hover:text-indigo-600 shadow-sm transition-all">
+            {lang === 'zh' ? '查看服务条款' : 'View Terms of Service'}
+          </a>
+          <a href="mailto:support@5layers.ai" className="px-3 py-2 rounded-xl bg-white border border-slate-100 hover:border-indigo-100 hover:text-indigo-600 shadow-sm transition-all">
+            support@5layers.ai
+          </a>
         </div>
       </section>
     </div>

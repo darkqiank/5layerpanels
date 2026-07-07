@@ -1,0 +1,68 @@
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1 (Bottom, L1) - Indigo -->
+  <path d="M15 72 L50 87 L85 72 L85 64 L50 79 L15 64 Z" fill="url(#grad1)" />
+  <path d="M15 64 L50 79 L85 64 L50 49 Z" fill="url(#grad1-top)" opacity="0.9" />
+
+  <!-- Layer 2 (L2) - Blue -->
+  <path d="M22 58 L50 70 L78 58 L78 51 L50 63 L22 51 Z" fill="url(#grad2)" />
+  <path d="M22 51 L50 63 L78 51 L50 39 Z" fill="url(#grad2-top)" opacity="0.9" />
+
+  <!-- Layer 3 (L3) - Emerald -->
+  <path d="M29 44 L50 53 L71 44 L71 38 L50 47 L29 38 Z" fill="url(#grad3)" />
+  <path d="M29 38 L50 47 L71 38 L50 29 Z" fill="url(#grad3-top)" opacity="0.9" />
+
+  <!-- Layer 4 (L4) - Amber -->
+  <path d="M36 30 L50 36 L64 30 L64 25 L50 31 L36 25 Z" fill="url(#grad4)" />
+  <path d="M36 25 L50 31 L64 25 L50 19 Z" fill="url(#grad4-top)" opacity="0.9" />
+
+  <!-- Layer 5 (L5, Top) - Rose -->
+  <path d="M43 17 L50 20 L57 17 L57 13 L50 16 L43 13 Z" fill="url(#grad5)" />
+  <path d="M43 13 L50 16 L57 13 L50 10 Z" fill="url(#grad5-top)" opacity="0.9" />
+
+  <defs>
+    <linearGradient id="grad1" x1="15" y1="64" x2="85" y2="87" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#4f46e5" />
+      <stop offset="100%" stop-color="#3730a3" />
+    </linearGradient>
+    <linearGradient id="grad1-top" x1="15" y1="49" x2="85" y2="79" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#818cf8" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+
+    <linearGradient id="grad2" x1="22" y1="51" x2="78" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#2563eb" />
+      <stop offset="100%" stop-color="#1e40af" />
+    </linearGradient>
+    <linearGradient id="grad2-top" x1="22" y1="39" x2="78" y2="63" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#60a5fa" />
+      <stop offset="100%" stop-color="#2563eb" />
+    </linearGradient>
+
+    <linearGradient id="grad3" x1="29" y1="38" x2="71" y2="53" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#065f46" />
+    </linearGradient>
+    <linearGradient id="grad3-top" x1="29" y1="29" x2="71" y2="47" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <linearGradient id="grad4" x1="36" y1="25" x2="64" y2="36" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#d97706" />
+      <stop offset="100%" stop-color="#92400e" />
+    </linearGradient>
+    <linearGradient id="grad4-top" x1="36" y1="19" x2="64" y2="31" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbbf24" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+
+    <linearGradient id="grad5" x1="43" y1="13" x2="57" y2="20" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#e11d48" />
+      <stop offset="100%" stop-color="#9f1239" />
+    </linearGradient>
+    <linearGradient id="grad5-top" x1="43" y1="10" x2="57" y2="16" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fb7185" />
+      <stop offset="100%" stop-color="#e11d48" />
+    </linearGradient>
+  </defs>
+</svg>

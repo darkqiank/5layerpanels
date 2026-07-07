@@ -32,8 +32,23 @@ import { CalendarView } from './components/CalendarView';
 import { NotificationCenter } from './components/NotificationCenter';
 import { getNextBillingDate } from './utils';
 import { LandingPage } from './components/LandingPage';
+import { CookieConsent } from './components/CookieConsent';
+import { LegalPage, LegalPageKind } from './components/LegalPage';
 import { Language, LOCALES } from './locales';
 import { FiveLayersLogo } from './components/FiveLayersLogo';
+
+const SUPPORT_EMAIL = 'support@5layers.ai';
+
+const getLegalPageKind = (): LegalPageKind | null => {
+  const normalizedPath = window.location.pathname.replace(/\/$/, '');
+  if (normalizedPath === '/privacy-policy' || normalizedPath === '/privacy-policy/index.html') {
+    return 'privacy';
+  }
+  if (normalizedPath === '/terms-of-service' || normalizedPath === '/terms-of-service/index.html') {
+    return 'terms';
+  }
+  return null;
+};
 
 // Programmatically generate initial dates relative to July 1, 2026 for demonstration
 const SAMPLE_SUBSCRIPTIONS: Subscription[] = [
@@ -175,6 +190,17 @@ export default function App() {
   };
 
   const t = LOCALES[lang];
+  const legalPageKind = getLegalPageKind();
+
+  useEffect(() => {
+    if (!legalPageKind) {
+      document.title = '5 Layers Panel — 5层 AI 蛋糕理论订阅追踪控制台';
+      return;
+    }
+    document.title = legalPageKind === 'privacy'
+      ? (lang === 'zh' ? '隐私政策 | 5 Layers Panel' : 'Privacy Policy | 5 Layers Panel')
+      : (lang === 'zh' ? '服务条款 | 5 Layers Panel' : 'Terms of Service | 5 Layers Panel');
+  }, [legalPageKind, lang]);
 
   // Backup and Upload refs
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -391,6 +417,72 @@ export default function App() {
     return result;
   }, [subscriptions, searchQuery, categoryFilter, paymentFilter, statusFilter, sortBy]);
 
+  const renderFooter = () => (
+    <footer className="bg-slate-50/40 border-t border-slate-100/60 mt-16 py-6 px-6 rounded-t-2xl">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-[10px] text-slate-400 font-medium gap-3">
+        <div className="flex items-center gap-2">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
+          </span>
+          <span>{t.sandboxActive}</span>
+        </div>
+        <nav className="text-slate-400/80 flex items-center gap-2 flex-wrap justify-center" aria-label={lang === 'zh' ? '页脚导航' : 'Footer navigation'}>
+          <span>{t.versionInfo}</span>
+          <span>•</span>
+          <a
+            href="/privacy-policy/index.html"
+            className="hover:text-indigo-500 text-slate-500 font-semibold transition-colors"
+          >
+            {lang === 'zh' ? '隐私政策' : 'Privacy Policy'}
+          </a>
+          <span>•</span>
+          <a
+            href="/terms-of-service/index.html"
+            className="hover:text-indigo-500 text-slate-500 font-semibold transition-colors"
+          >
+            {lang === 'zh' ? '服务条款' : 'Terms of Service'}
+          </a>
+          <span>•</span>
+          <a
+            href={`mailto:${SUPPORT_EMAIL}`}
+            className="hover:text-indigo-500 text-slate-500 font-semibold transition-colors"
+          >
+            {SUPPORT_EMAIL}
+          </a>
+          <span>•</span>
+          <a
+            href="https://github.com/darkqiank/5layerpanels"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-indigo-500 text-slate-500 font-semibold inline-flex items-center gap-1 transition-colors"
+          >
+            <Github size={11} />
+            <span>darkqiank/5layerpanels</span>
+          </a>
+          <span>•</span>
+          <span className="font-semibold text-slate-500">@5layers.ai</span>
+        </nav>
+      </div>
+    </footer>
+  );
+
+  if (legalPageKind) {
+    return (
+      <div className="min-h-screen bg-[#FAFAF9] text-slate-700 antialiased font-sans flex flex-col justify-between">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px] pointer-events-none" />
+        <LegalPage
+          kind={legalPageKind}
+          lang={lang}
+          onToggleLanguage={toggleLanguage}
+          supportEmail={SUPPORT_EMAIL}
+        />
+        {renderFooter()}
+        <CookieConsent lang={lang} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-[#FAFAF9] text-slate-700 antialiased font-sans flex flex-col justify-between">
       {/* Dynamic Grid Background Decorative Layer */}
@@ -488,6 +580,20 @@ export default function App() {
               </button>
 
               <div className="w-[1px] h-6 bg-slate-200 mx-1" />
+
+              <a
+                href="/privacy-policy/index.html"
+                className="hidden lg:inline-flex px-3 py-2 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-600 text-xs font-semibold shadow-sm transition-all"
+              >
+                {lang === 'zh' ? '隐私政策' : 'Privacy'}
+              </a>
+
+              <a
+                href="/terms-of-service/index.html"
+                className="hidden lg:inline-flex px-3 py-2 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-600 text-xs font-semibold shadow-sm transition-all"
+              >
+                {lang === 'zh' ? '服务条款' : 'Terms'}
+              </a>
 
               {/* Alert bell icon with counter badge */}
               <button
@@ -795,32 +901,9 @@ export default function App() {
       </AnimatePresence>
 
       {/* Global Bottom Credit / Local Time / Integrity Status */}
-      <footer className="bg-slate-50/40 border-t border-slate-100/60 mt-16 py-6 px-6 rounded-t-2xl">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-[10px] text-slate-400 font-medium gap-3">
-          <div className="flex items-center gap-2">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-            </span>
-            <span>{t.sandboxActive}</span>
-          </div>
-          <div className="text-slate-400/80 flex items-center gap-2 flex-wrap justify-center">
-            <span>{t.versionInfo}</span>
-            <span>•</span>
-            <a 
-              href="https://github.com/darkqiank/5layerpanels" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="hover:text-indigo-500 text-slate-500 font-semibold inline-flex items-center gap-1 transition-colors"
-            >
-              <Github size={11} />
-              <span>darkqiank/5layerpanels</span>
-            </a>
-            <span>•</span>
-            <span className="font-semibold text-slate-500">@5layers.ai</span>
-          </div>
-        </div>
-      </footer>
+      {renderFooter()}
+
+      <CookieConsent lang={lang} />
     </div>
   );
 }
