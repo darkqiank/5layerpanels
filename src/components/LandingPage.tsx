@@ -174,7 +174,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang, onTo
           </div>
 
           {/* Quick Navigation Links */}
-          <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-500">
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-500">
             <a href="#cake-concept" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
               {lang === 'zh' ? '🍰 五层蛋糕架构' : '🍰 AI Cake'}
             </a>
@@ -184,11 +184,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang, onTo
             <a href="#pricing" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
               {lang === 'zh' ? '💰 版本定价' : '💰 Pricing'}
             </a>
+            <span className="h-4 w-px bg-slate-200" aria-hidden="true" />
             <a href="/privacy-policy/index.html" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
-              {lang === 'zh' ? '隐私政策' : 'Privacy Policy'}
+              {lang === 'zh' ? '🔒 隐私政策' : '🔒 Privacy Policy'}
             </a>
             <a href="/terms-of-service/index.html" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
-              {lang === 'zh' ? '服务条款' : 'Terms'}
+              {lang === 'zh' ? '📄 服务条款' : '📄 Terms'}
+            </a>
+            <a href="/about-us/index.html" className="hover:text-indigo-600 hover:bg-slate-50 px-2.5 py-1.5 rounded-lg transition-all">
+              {lang === 'zh' ? '👤 关于我们' : '👤 About Us'}
             </a>
           </nav>
 
@@ -507,17 +511,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterApp, lang, onTo
               {t.aboutDemoDesc}
             </p>
           </div>
-        </div>
-        <div className="flex flex-wrap justify-center gap-3 text-[11px] font-bold text-slate-500">
-          <a href="/privacy-policy/index.html" className="px-3 py-2 rounded-xl bg-white border border-slate-100 hover:border-indigo-100 hover:text-indigo-600 shadow-sm transition-all">
-            {lang === 'zh' ? '查看完整隐私政策' : 'View Privacy Policy'}
-          </a>
-          <a href="/terms-of-service/index.html" className="px-3 py-2 rounded-xl bg-white border border-slate-100 hover:border-indigo-100 hover:text-indigo-600 shadow-sm transition-all">
-            {lang === 'zh' ? '查看服务条款' : 'View Terms of Service'}
-          </a>
-          <a href="mailto:support@5layers.ai" className="px-3 py-2 rounded-xl bg-white border border-slate-100 hover:border-indigo-100 hover:text-indigo-600 shadow-sm transition-all">
-            support@5layers.ai
-          </a>
         </div>
       </section>
     </div>

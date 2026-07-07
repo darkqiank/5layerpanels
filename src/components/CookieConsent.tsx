@@ -54,14 +54,6 @@ export const CookieConsent: React.FC<CookieConsentProps> = ({ lang }) => {
                 {lang === 'zh'
                   ? '5 Layers Panel 使用必要的浏览器本地存储来保存语言偏好、订阅数据和本确认状态。我们不使用广告追踪 Cookie。'
                   : '5 Layers Panel uses essential browser storage for language preferences, subscription data, and this consent state. We do not use advertising or tracking cookies.'}
-                {' '}
-                <a href="/privacy-policy/index.html" className="font-bold text-indigo-600 hover:text-indigo-700">
-                  {lang === 'zh' ? '隐私政策' : 'Privacy Policy'}
-                </a>
-                <span className="text-slate-300"> / </span>
-                <a href="/terms-of-service/index.html" className="font-bold text-indigo-600 hover:text-indigo-700">
-                  {lang === 'zh' ? '服务条款' : 'Terms of Service'}
-                </a>
               </p>
             </div>
           </div>

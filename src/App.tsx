@@ -47,6 +47,9 @@ const getLegalPageKind = (): LegalPageKind | null => {
   if (normalizedPath === '/terms-of-service' || normalizedPath === '/terms-of-service/index.html') {
     return 'terms';
   }
+  if (normalizedPath === '/about-us' || normalizedPath === '/about-us/index.html') {
+    return 'about';
+  }
   return null;
 };
 
@@ -197,9 +200,15 @@ export default function App() {
       document.title = '5 Layers Panel — 5层 AI 蛋糕理论订阅追踪控制台';
       return;
     }
-    document.title = legalPageKind === 'privacy'
-      ? (lang === 'zh' ? '隐私政策 | 5 Layers Panel' : 'Privacy Policy | 5 Layers Panel')
-      : (lang === 'zh' ? '服务条款 | 5 Layers Panel' : 'Terms of Service | 5 Layers Panel');
+    if (legalPageKind === 'privacy') {
+      document.title = lang === 'zh' ? '隐私政策 | 5 Layers Panel' : 'Privacy Policy | 5 Layers Panel';
+      return;
+    }
+    if (legalPageKind === 'terms') {
+      document.title = lang === 'zh' ? '服务条款 | 5 Layers Panel' : 'Terms of Service | 5 Layers Panel';
+      return;
+    }
+    document.title = lang === 'zh' ? '关于我们 | 5 Layers Panel' : 'About Us | 5 Layers Panel';
   }, [legalPageKind, lang]);
 
   // Backup and Upload refs
@@ -445,6 +454,13 @@ export default function App() {
           </a>
           <span>•</span>
           <a
+            href="/about-us/index.html"
+            className="hover:text-indigo-500 text-slate-500 font-semibold transition-colors"
+          >
+            {lang === 'zh' ? '关于我们' : 'About Us'}
+          </a>
+          <span>•</span>
+          <a
             href={`mailto:${SUPPORT_EMAIL}`}
             className="hover:text-indigo-500 text-slate-500 font-semibold transition-colors"
           >
@@ -585,14 +601,21 @@ export default function App() {
                 href="/privacy-policy/index.html"
                 className="hidden lg:inline-flex px-3 py-2 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-600 text-xs font-semibold shadow-sm transition-all"
               >
-                {lang === 'zh' ? '隐私政策' : 'Privacy'}
+                {lang === 'zh' ? '🔒 隐私政策' : '🔒 Privacy'}
               </a>
 
               <a
                 href="/terms-of-service/index.html"
                 className="hidden lg:inline-flex px-3 py-2 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-600 text-xs font-semibold shadow-sm transition-all"
               >
-                {lang === 'zh' ? '服务条款' : 'Terms'}
+                {lang === 'zh' ? '📄 服务条款' : '📄 Terms'}
+              </a>
+
+              <a
+                href="/about-us/index.html"
+                className="hidden lg:inline-flex px-3 py-2 rounded-xl border border-slate-100 bg-white hover:bg-slate-50 text-slate-500 hover:text-indigo-600 text-xs font-semibold shadow-sm transition-all"
+              >
+                {lang === 'zh' ? '👤 关于我们' : '👤 About'}
               </a>
 
               {/* Alert bell icon with counter badge */}
